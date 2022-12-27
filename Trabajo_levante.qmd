@@ -78,18 +78,18 @@ El Levante UD es un club de fútbol, cuya sede reside en la ciudad de Valencia, 
 ```{r}
 #gráfico evolución del escudo
 
-logo1913 <- image_read("./imagenes/1913.gif") %>%  image_annotate(., "1913", size = 40, gravity = "southwest", color = "black") %>% image_scale(.,"700")
+logo1913 <- image_read("./imagenes/1913.gif") %>%  image_annotate(., "1913", size = 40, gravity = "southwest", color = "black")
 
 logo_transición <- image_read("./imagenes/transición logo.png") %>%
-  image_scale(.,"800") %>% image_annotate(., "1939", size = 40, gravity = "southwest", color = "black") %>% image_scale(.,"700")
+  image_scale(.,"800") %>% image_annotate(., "1939", size = 40, gravity = "southwest", color = "black")
 
 logo1976 <- image_read("./imagenes/1976.jpg") %>%
-  image_scale(.,"500")    %>%  image_annotate(., "1976", size = 40, gravity = "southwest", color = "black") %>% image_scale(.,"700")
+  image_scale(.,"500")    %>%  image_annotate(., "1976", size = 40, gravity = "southwest", color = "black")
 
 logo2022 <- image_read("./imagenes/2022.png")  %>%  image_annotate(., "2022", size = 40, gravity = "southwest", color = "black")
 
 evolucion_logo <- c(logo1913,logo_transición,logo1976,logo2022)
-image_animate(image_scale(evolucion_logo),fps = 0.5) %>% image_scale(.,"700")
+image_animate(image_scale(evolucion_logo),fps = 0.5)
 
 ```
 
