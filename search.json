@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n\nCódigo\n1 + 1\n\n\n[1] 2\n\n\n\n\n\nReutilizaciónhttps://creativecommons.org/licenses/by/4.0/deed.es"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\n\n\n\nReutilizaciónhttps://creativecommons.org/licenses/by/4.0/deed.es"
+  },
+  {
+    "objectID": "Slides_levante.html#datos-del-trabajo",
+    "href": "Slides_levante.html#datos-del-trabajo",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Datos del trabajo",
+    "text": "Datos del trabajo\nLa base de datos que se ha utilizado para crear el trabajo procede en su 100% de la página web de base de datos Kaggle y más concretamente cada una de ellas: Partidos, junto a Jugadores"
+  },
+  {
+    "objectID": "Slides_levante.html#código-r-utilizado",
+    "href": "Slides_levante.html#código-r-utilizado",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Código R utilizado",
+    "text": "Código R utilizado\n\n\n#Estas son los distintos paquetes utilizados:\n\nlibrary(readr)\nlibrary(gapminder)\nlibrary(gganimate)\nlibrary(stats)\nlibrary(plotly)\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(treemap)\nlibrary(treemapify)\nlibrary(magick)\n\n#Mediante el siguiente código importamos los datos necesarios:\n\nJugadores <- read_csv(\"Datos/laliga_player_stats_spanish.csv\")\nPartidos <- read_csv(\"Datos/laliga2018.csv\")"
+  },
+  {
+    "objectID": "Slides_levante.html#evolución-del-levante-ud",
+    "href": "Slides_levante.html#evolución-del-levante-ud",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Evolución del Levante UD",
+    "text": "Evolución del Levante UD"
+  },
+  {
+    "objectID": "Slides_levante.html#partidos-jugados-en-casa-estadio-ciutat-de-valència",
+    "href": "Slides_levante.html#partidos-jugados-en-casa-estadio-ciutat-de-valència",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Partidos jugados en casa (Estadio Ciutat de València)",
+    "text": "Partidos jugados en casa (Estadio Ciutat de València)"
+  },
+  {
+    "objectID": "Slides_levante.html#partidos-jugados-en-casa-estadio-ciutat-de-valència-1",
+    "href": "Slides_levante.html#partidos-jugados-en-casa-estadio-ciutat-de-valència-1",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Partidos jugados en casa (Estadio Ciutat de València)",
+    "text": "Partidos jugados en casa (Estadio Ciutat de València)"
+  },
+  {
+    "objectID": "Slides_levante.html#partidos-jugados-como-visitante",
+    "href": "Slides_levante.html#partidos-jugados-como-visitante",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Partidos jugados como visitante",
+    "text": "Partidos jugados como visitante"
+  },
+  {
+    "objectID": "Slides_levante.html#partidos-jugados-como-visitante-1",
+    "href": "Slides_levante.html#partidos-jugados-como-visitante-1",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Partidos jugados como visitante",
+    "text": "Partidos jugados como visitante"
+  },
+  {
+    "objectID": "Slides_levante.html#plantilla-de-26-jugadores",
+    "href": "Slides_levante.html#plantilla-de-26-jugadores",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Plantilla de 26 jugadores",
+    "text": "Plantilla de 26 jugadores"
+  },
+  {
+    "objectID": "Slides_levante.html#tiempo-jugado-por-todos-los-jugadores-de-la-plantilla",
+    "href": "Slides_levante.html#tiempo-jugado-por-todos-los-jugadores-de-la-plantilla",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Tiempo jugado por todos los jugadores de la plantilla",
+    "text": "Tiempo jugado por todos los jugadores de la plantilla"
+  },
+  {
+    "objectID": "Slides_levante.html#análisis-de-los-goles-del-equipo",
+    "href": "Slides_levante.html#análisis-de-los-goles-del-equipo",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Análisis de los goles del equipo",
+    "text": "Análisis de los goles del equipo"
+  },
+  {
+    "objectID": "Slides_levante.html#análisis-de-las-asistencias-del-equipo",
+    "href": "Slides_levante.html#análisis-de-las-asistencias-del-equipo",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Análisis de las asistencias del equipo",
+    "text": "Análisis de las asistencias del equipo"
+  },
+  {
+    "objectID": "Slides_levante.html#análisis-de-las-tarjetas-obtenidas-por-el-equipo",
+    "href": "Slides_levante.html#análisis-de-las-tarjetas-obtenidas-por-el-equipo",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Análisis de las tarjetas obtenidas por el equipo",
+    "text": "Análisis de las tarjetas obtenidas por el equipo"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "",
+    "text": "Hola, mi nombre es Alejandro Hortelano Martín\nEsta web la utilizaré para presentar el trabajo individual final de la asignatura “Programación y Manejo de datos en la era del Big Data”, optativa del 4º curso del grado de Economía de la Universidad de Valencia\nLa web de la asignatura puede verse aquí y los trabajos de mis compañeros de curso puedes verlos aquí.\nEl nombre final del trabajo que he decidido ponerle es “Levante UD en la temporada 18-19”, ya que fundalmente es un análisis de las distintas variables relacionadas con el equipo durante esa temporada. En concreto de datos relacionados con los partidos y los jugadores.\nEl trabajo puede verse aquí\n\n\nReutilizaciónhttps://creativecommons.org/licenses/by/4.0/deed.es"
+  },
+  {
+    "objectID": "Trabajo_levante.html",
+    "href": "Trabajo_levante.html",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "",
+    "text": "EL siguiente trabajo se estructurará de la siguiente forma:\n\nEn primer lugar, realizaremos una breve explicación de los acontecimientos de la temporada 2018/2019 junto a la exposición de la base de datos utilizada, además de los paquetes utilizados para crear todo el trabajo.\nEn segundo lugar, se procederá a analizar los partidos centrándose en el Levante UD, utilizando como principales variables a estudiar los resultados obtenidos, tanto dentro, como fuera de casa, así como las valoraciones obtenidas en todos los partidos.\nEn tercer lugar, se analizarán los jugadores del Levante UD por posiciones y variables que hemos considerado fundamentales, así como la relevancia que han tenido para la consecución de los objetivos del club.\nEn último lugar, concluiremos con una opinión sobre la temporada realizada por el equipo granota y la efetctividad que ha tenido el entrenador y los jugadores a lo largo de los partidos."
+  },
+  {
+    "objectID": "Trabajo_levante.html#código-r-utilizado",
+    "href": "Trabajo_levante.html#código-r-utilizado",
+    "title": "Levante UD en la temporada 18-19",
+    "section": "Código R utilizado",
+    "text": "Código R utilizado\n\nCódigo\n#Estas son los distintos paquetes utilizados:\n\nlibrary(readr)\nlibrary(gapminder)\nlibrary(gganimate)\nlibrary(stats)\nlibrary(plotly)\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(treemap)\nlibrary(treemapify)\nlibrary(magick)\n\n#Mediante el siguiente código importamos los datos necesarios:\n\nJugadores <- read_csv(\"Datos/laliga_player_stats_spanish.csv\")\nPartidos <- read_csv(\"Datos/laliga2018.csv\")"
+  }
+]
