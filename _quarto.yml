@@ -1,0 +1,78 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Levante UD en la temporada 18-19"
+  favicon: my_favicon.png
+  # site-url: https://....      
+  # repo-url: https://....
+  # repo-actions: [edit, issue]
+  search:   
+    location: navbar
+    type: overlay   
+    copy-button: true
+  navbar:
+    logo: /imagenes/profile.jpg           #---
+    background: "purple"
+    foreground: "white"    
+    left: 
+      - icon: house-door
+        href: index.html
+    right:
+      - text: "Trabajo individual"   #---
+        href: Trabajo_levante.html
+      - text: "Slides"              #---
+        href: Slides_levante.html
+      - icon: github
+        href: https://github.com/alexhortelano6    #---
+      - icon: envelope
+        url: "mailto:<ahormar@alumni.uv.es>"            #---
+  page-footer:
+    border: true
+    background: "purple"
+    left: "© 2022 Alejandro Hortelano Martín"   #----
+    center: "Hecho con [Quarto](https://quarto.org)"
+    right:
+      - icon: github
+        href: https://github.com/alexhortelano6    #----
+      - icon: envelope
+        url: "mailto:<ahormar>@alumni.uv.es"            #-----
+    
+format:
+  html:
+    theme: united           #---
+    highlight-style: a11y   #---
+    css: my_styles.css   
+    page-layout: full
+    toc: true
+    code-copy: true
+    code-overflow: wrap    #- {wrap, scroll}
+    code-fold: show
+    code-line-numbers: true
+    
+
+# Enable CC licence appendix
+license: "CC BY"
+
+lang: es   #- {es, en}
+
+
+# Default execute options
+execute:
+  echo: true
+  message: false
+  warning: false
+  eval: true
+
+#- Default knitr options
+knitr:
+  opts_chunk: 
+    collapse: true
+    comment: "#>" 
+    fig.asp:  7/9
+    out.width: "95%"
+    fig.align: "center"
+    fig.show: "hold"
+    R.options:
+      options(scipen = 999) #- para quitar la notación científica

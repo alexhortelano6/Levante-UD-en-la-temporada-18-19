@@ -1,0 +1,317 @@
+---
+title: "Levante UD en la temporada 18-19" 
+date: 2022-12-26 #- ISO8601 YYYY-MM-DD format 
+author: Alejandro Hortelano Martin
+date-format: short
+format: 
+  revealjs:
+    scrollable: true
+    slide-level: 2
+    height: 900
+    width: 1600
+    toc: false
+    center-title-slide: true
+    title-slide-attributes: #- atributos para la slide de titulo
+      data-background-color: "purple"   #- color de R-ladies
+    preview-links: auto  #- true: abre un iframe en lugar de abrir ventana
+    link-external-newwindow: true
+    transition: fade
+    fontcolor: "purple"
+    highlight-style: a11y
+    code-line-numbers: true
+    number-sections: false
+    slide-number: c/t  
+    incremental: false   
+footer: |
+  Slides hechas con [Quarto](https://quarto.org/) 
+#theme: moon
+---
+
+# Indice
+
+1. Introducción
+
+2. Análisis partidos
+
+3. Análisis jugadores
+
+4. Conclusión
+
+---
+
+## Datos del trabajo
+
+La base de datos que se ha utilizado para crear el trabajo procede en su 100% de la página web de base de datos [Kaggle](https://www.kaggle.com) y más concretamente cada una de ellas: [Partidos](https://www.kaggle.com/datasets/sanjeetsinghnaik/la-liga-match-data), junto a [Jugadores](https://www.kaggle.com/datasets/alvarob96/laliga_2018-19_season_player_stats)
+
+---
+
+## Código R utilizado
+
+```{r}
+
+#Estas son los distintos paquetes utilizados:
+
+library(readr)
+library(gapminder)
+library(gganimate)
+library(stats)
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+library(treemap)
+library(treemapify)
+library(magick)
+
+#Mediante el siguiente código importamos los datos necesarios:
+
+Jugadores <- read_csv("Datos/laliga_player_stats_spanish.csv")
+Partidos <- read_csv("Datos/laliga2018.csv")
+
+```
+
+---
+
+# Introducción
+
+En la temporada 2018/19 el FC Barcelona se alzó con el título de campeón con 81 puntos, sumado con el descenso del Girona, Huesca y Rayo Vallecano; por otro lado, destacamos por primera vez el uso de la tecnología VAR en la **Liga Santander** junto a ser el último año "normal" antes de la pandemia
+
+---
+
+## Evolución del Levante UD
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+#gráfico evolución del escudo
+
+logo1913 <- image_read("./imagenes/1913.gif") %>%  image_annotate(., "1913", size = 40, gravity = "southwest", color = "black")
+
+logo_transición <- image_read("./imagenes/transición logo.png") %>%
+  image_scale(.,"800") %>% image_annotate(., "1939", size = 40, gravity = "southwest", color = "black")
+
+logo1976 <- image_read("./imagenes/1976.jpg") %>%
+  image_scale(.,"500")    %>%  image_annotate(., "1976", size = 40, gravity = "southwest", color = "black")
+
+logo2022 <- image_read("./imagenes/2022.png")  %>%  image_annotate(., "2022", size = 40, gravity = "southwest", color = "black")
+
+evolucion_logo <- c(logo1913,logo_transición,logo1976,logo2022)
+image_animate(image_scale(evolucion_logo),fps = 0.5)
+
+```
+
+---
+
+# Análisis de los partidos del Levante UD
+
+---
+
+## Partidos jugados en casa (Estadio Ciutat de València)
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+Resultados_mas_comunes_casa <- Partidos %>% filter(`Home Team` == "LEVANTE") %>%
+  count(`Score`)
+
+Grafico_resultados_casa <- 
+  ggplot(Resultados_mas_comunes_casa) +
+  aes(x = reorder(Score, desc(n)), y = n) +
+  geom_col(fill = "#112446") +
+  labs(
+    x = "Resultados",
+    y = "Número de veces que se repiten",
+    title = "Resultados más comunes",
+    subtitle = "En el Ciutat de València"
+  ) + geom_point(color = "orange") +
+  geom_text(aes(label=Score), vjust=1.5,hjust=0.49, color= "White",    
+            position = position_dodge(0.1),  size=4.0)
+
+Grafico_resultados_casa
+```
+
+---
+
+## Partidos jugados en casa (Estadio Ciutat de València)
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+mayor_rating <- Partidos %>% filter(`Home Team` == "LEVANTE") %>%
+  slice_max(`Home Team Rating` , n=19)
+
+grafico_mayor_rating_casa <- ggplot(mayor_rating) +
+  aes((x = reorder(`Away Team`,`Home Team Rating`)), y = `Home Team Rating`) + geom_col(fill = "#112446") +
+  labs(
+    x = "Equipos",
+    y = "Rating",
+    title = "Mayor valoración obtenida",
+    subtitle = "Jugando en el Ciutat de València"
+  ) + geom_point(color = "orange") +
+  geom_text(aes(label=Score), vjust=0.49,hjust=1.5, color= "orange",    
+            position = position_dodge(0.1),  size=5.0) + 
+  coord_flip()
+
+grafico_mayor_rating_casa
+```
+
+---
+
+## Partidos jugados como visitante
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+#Gráfico de los resultados más comunes fuera de casa
+
+Resultados_mas_comunes_fuera <- Partidos %>% filter(`Away Team` == "LEVANTE") %>%
+  count(`Score`)
+
+Grafico_resultados_fuera <- ggplot(Resultados_mas_comunes_fuera) +
+  aes(x = reorder(Score,desc(n)), y = n, fill = Score) +
+  geom_col() +
+  scale_fill_hue(direction = 1) +
+  theme_minimal() +
+  coord_polar() +
+  labs(
+    x = "Resultados",
+    y = "Número de veces que se repiten",
+    title = "Resultados más comunes",
+    subtitle = "Fuera del Ciutat de València"
+  ) + geom_text(aes(label=n), vjust=0.99,hjust=1.5, color= "black",    
+                position = position_dodge(0.1),  size=4.0)
+
+Grafico_resultados_fuera
+```
+
+---
+
+## Partidos jugados como visitante
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+#gráfico con mayor rating jugando fuera de casa
+
+
+mayor_rating_fuera <- Partidos %>% filter(`Away Team` == "LEVANTE") %>%
+  slice_max(`Home Team Rating` , n=19)
+
+grafico_mayor_rating_fuera <- ggplot(mayor_rating_fuera) +
+  aes(x = reorder (`Home Team`,`Away Team Rating`), y = `Away Team Rating`) + geom_col(fill = "#112446") +
+  labs(
+    x = "Equipos",
+    y = "Rating",
+    title = "Mayor valoración obtenida",
+    subtitle = "Jugando fuera del Ciutat de València"
+  ) + geom_point(color = "orange") +
+  geom_text(aes(label=Score), vjust=0.49,hjust=1.5, color= "orange",    
+            position = position_dodge(0.1),  size=5.0) + 
+  coord_flip()
+
+grafico_mayor_rating_fuera
+
+```
+
+---
+
+# Análisis de los jugadores
+
+---
+
+## Plantilla de 26 jugadores
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+jugadores_levante <- Jugadores %>% filter(Equipo == "Levante UD")
+
+jugadores_levante %>% DT::datatable(extensions = 'Buttons',
+                                    options = list(dom = 'Blfrtip',
+                                    buttons = c('copy','csv','excel', 'pdf', 'print'),
+                                    pageLength = 5, autowidht = TRUE))
+```
+
+---
+
+## Tiempo jugado por todos los jugadores de la plantilla
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+#Gáfico de los jugadores con más partidos enteros jugados
+
+Jugadores_mas_minutos <- Jugadores %>% filter(Equipo == "Levante UD") %>% slice_max(`Partidos jugados enteros` , n=30) %>% filter(`Posicion` %in% c("Defensa","Centrocampista","Delantero"))
+
+Grafico_jugadores_mas_partidos_enteros <- ggplot(Jugadores_mas_minutos) +
+ aes(x = reorder(Nombre, desc(`Partidos jugados enteros`)), y = `Partidos jugados enteros` , colour = Posicion) +
+ geom_col(fill = "#112446") +
+ labs(x = "Nombre", y = "Nº Partidos", title = "Jugadores con más partidos jugados enteros", 
+ subtitle = "Temporada 2018 / 2019") +
+ coord_flip() + geom_text(aes(label=`Partidos jugados enteros`), vjust=1,hjust=1, color= "White",    
+                          position = position_dodge(0.1),  size=5.0
+ )
+
+Grafico_jugadores_mas_partidos_enteros 
+```
+
+---
+
+## Análisis de los goles del equipo
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+mayores_goleadores <- Jugadores %>% filter(Equipo == "Levante UD") %>% select(Nombre,`Goles marcados`)
+
+grafico_goleadores <- ggplot(mayores_goleadores) + 
+  aes(area = `Goles marcados`,fill = Nombre, label = Nombre) +
+  geom_treemap() +
+  geom_treemap_text(colour = "black",
+                    place = "centre",
+                    size = 15) +
+  scale_fill_grey() +
+  labs(title = "Mayores goleadores",
+       subtitle = "En la temporada 2018/2019")
+grafico_goleadores
+
+```
+
+---
+
+## Análisis de las asistencias del equipo
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+
+Asistencias_levante <- Jugadores %>% filter(Equipo == "Levante UD") %>% 
+  slice_max(`Asistencias de gol` , n=10)
+
+Grafico_asistencia_posicion <-  
+  ggplot(Asistencias_levante) +
+  aes(x = Nombre, y = `Asistencias de gol`, colour = Posicion) +
+  geom_col(fill = "#112446") +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Jugadores",
+    y = "Asistencias",
+    title = "Número de asistencias",
+    subtitle = "Según la posición jugada"
+  ) +
+  theme_minimal() +
+  facet_grid(rows = vars(Posicion), scales = "free_y") + coord_flip()
+ggplotly(Grafico_asistencia_posicion)
+
+```
+
+---
+
+## Análisis de las tarjetas obtenidas por el equipo
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, results = TRUE}
+#Defensas con mayor número de tarjetas amarillas
+
+mayores_tarjetas <- Jugadores %>% filter(Equipo == "Levante UD") %>% slice_max(`Tarjetas amarillas`,n=20)
+
+grafico_mayores_tarjetas <- ggplot(mayores_tarjetas) +
+  aes(x = reorder(Nombre, `Tarjetas amarillas`), y = `Tarjetas amarillas`) +
+  geom_col(fill = "#112446") +
+  labs(
+    x = "Jugadores",
+    y = "Número total de amarillas en la temporada",
+    title = "Número de tarjetas en la Temporada 18/19",
+    subtitle = "Contando únicamente tarjetas amarillas"
+  )  + coord_flip() +
+  geom_text(aes(label=`Tarjetas amarillas`), vjust=0.49,hjust=1.5, color= "orange",    
+            position = position_dodge(0.1),  size=5.0)
+
+grafico_mayores_tarjetas
+```
+
+---
+
+# Conclusión
+
+· Por último, finalizaremos con una conclusión de la temporada 2018/2019 del Levante. El resultado final obtenido por el equipo granota **cumplió con las expectativas** de gran parte de los aficionados, obteniendo la **posición** número 15 del campeonato, por detrás del Villareal y por delante del Valladolid, pero con un final de temporada extremadamente angustioso para la gran mayoría de seguidores, ya que se quedaron a 3 puntos del descenso y tan solo en las últimas jornadas se alejaron de los puestos de ascenso con dos victorias consecutivas en la jornada 36 y 37, y un empate en la jornada final. A pesar del resultado final, para muchos demasiado **apurado**, destacamos varios jugadores de la plantilla según los datos analizados anteriormente, sin los cuales no se podría haber logrado ganar 11 partidos o empatar otros 11, como José Morales, José Campaña, Roger, Postigo o Rober Pier en el aspecto defensivo. Y con todo ello, el Levante UD se dispondría a fortalecer su equipo tras las salidas de ese verano, manteniendo la **permanencia** en la categoría líder nacional hasta la fatídica temporada 2021/2022 en la que tras sumar más de 30 jornadas sin conocer la victoria, el conjunto levantinista descendería para el siguiente y actual año luchar por el ascenso directo y la vuelta a la categoría que le pertenece.
